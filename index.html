@@ -64,13 +64,21 @@
         --font-sans: 'Inter', sans-serif;
     }
 
+    /* KUNCI UTAMA: Lock Scroll di awal */
     html, body {
-      margin: 0; padding: 0; height: 100%; width: 100%;
+      margin: 0; padding: 0; 
+      height: 100%; width: 100%;
       background: var(--bg-dark); 
-      overflow-x: hidden; 
       font-family: var(--font-sans); color: var(--text-primary);
       -webkit-font-smoothing: antialiased;
       scroll-behavior: smooth;
+      overflow: hidden; /* Lock scroll by default */
+    }
+
+    /* Class untuk membuka scroll setelah tombol diklik */
+    body.unlocked {
+      overflow: auto;
+      overflow-x: hidden;
     }
     
     /* --- BACKGROUND SLIDESHOW --- */
@@ -424,7 +432,7 @@
                 <div id="lockdownCountdownTimer"></div>
             </div>
             
-            <button class="scroll-down-btn" onclick="scrollToDetails()">Lihat Lokasi & Jadwal ▼</button>
+            <button class="cta-btn" onclick="unlockAndScroll()">Lihat Lokasi & Jadwal ▼</button>
         </div>
     </div>
     
@@ -502,7 +510,7 @@
                         <div class="venue-caption">Taman Air Partini</div>
                     </div>
                     <div class="venue-slide">
-                        <img src="img/PXL_20250629_053845405.jpg" alt="Minapadi1">
+                        <img src="img/PXL_20250629_053845405.jpg" alt="Minapadi2">
                         <div class="venue-caption">Bale MinaPadi</div>
                     </div>
                     <div class="venue-slide">
@@ -635,11 +643,18 @@
         }, 80);
     }
 
-    window.scrollToDetails = () => {
+// --- UNLOCK SCROLL & MOVE ---
+    function unlockAndScroll() {
+        // 1. Tambahkan class unlocked ke body untuk mengaktifkan overflow: auto
+        document.body.classList.add('unlocked');
+        
+        // 2. Scroll ke section detail
         const details = document.getElementById('eventDetailsSection');
         details.scrollIntoView({ behavior: 'smooth' });
+        
+        // 3. Trigger animasi kalender setelah scroll sampai
         setTimeout(triggerCalendarAnim, 1000); 
-    };
+    }
 
     const targetDate = new Date(2025, 11, 28, 10, 0, 0).getTime();
     startCountdown(targetDate);
