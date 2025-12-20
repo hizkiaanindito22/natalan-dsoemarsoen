@@ -22,7 +22,6 @@
         --font-sans: 'Inter', sans-serif;
     }
 
-    /* SCROLL LOCK AWAL DIHAPUS, DITANGANI OLEH JS SAAT TOMBOL DIKLIK */
     html, body {
       margin: 0; padding: 0; height: 100%; width: 100%;
       background: var(--bg-dark); 
@@ -36,8 +35,8 @@
     #loginScreen {
         position: relative; inset: 0; z-index: 1000; 
         background: transparent;
-        height: 100vh; /* Tinggi awal, akan diubah oleh JS */
-        overflow: hidden; /* Overflow awal, akan diubah oleh JS */
+        height: 100vh;
+        overflow: hidden;
         width: 100%;
     }
     
@@ -145,6 +144,59 @@
         border-color: var(--accent-gold);
     }
 
+    /* --- GIFT EXCHANGE SECTION --- */
+    .gift-info-section {
+        position: relative;
+        width: 100%;
+        height: 350px;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .gift-video-bg {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        filter: brightness(0.4) saturate(0.8);
+    }
+    .gift-overlay-content {
+        position: relative;
+        z-index: 1;
+        padding: 30px;
+        color: #fff;
+    }
+    .gift-header {
+        font-family: var(--font-serif);
+        font-size: 2.2rem;
+        color: var(--accent-gold);
+        margin-bottom: 10px;
+        font-style: italic;
+    }
+    .gift-desc {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .gift-badge {
+        display: inline-block;
+        margin-top: 20px;
+        background: rgba(212, 175, 55, 0.2);
+        border: 1px solid var(--accent-gold);
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
     .ic-icon-bw {
         font-size: 2.5rem;
         margin-bottom: 15px;
@@ -201,14 +253,13 @@
     }
     .tear-anim { animation: tearOff 0.6s forwards ease-in; }
 
-    /* VENUE SLIDESHOW & MAP SECTION (SLIDE FOTO) */
+    /* VENUE SLIDESHOW */
     .venue-slider-container {
         width: 100%;
         height: 250px;
         border-radius: 16px;
         overflow: hidden;
         position: relative;
-        margin-bottom: 15px;
         border: 1px solid rgba(255,255,255,0.1);
     }
     
@@ -236,34 +287,25 @@
         font-weight: 600; letter-spacing: 1px;
     }
     
-    .map-container-full, #aftermovieSection .map-area-content {
-        width: 100%;
-        height: 300px;
-        border-radius: 16px;
-        overflow: hidden;
+    .map-container-full {
+        width: 100%; height: 300px;
+        border-radius: 16px; overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .map-container-full iframe {
+        width: 100%; height: 100%; border: 0;
+        filter: grayscale(20%) contrast(1.1); 
+    }
+    
+    /* AFTERMOVIE */
+    #aftermovieSection .map-area-content {
+        width: 100%; height: 400px;
+        border-radius: 16px; overflow: hidden;
         border: 1px solid rgba(255,255,255,0.1);
         position: relative;
     }
-    
-    .map-container-full iframe, #aftermovieSection .map-area-content iframe {
-        width: 100%; height: 100%; border: 0;
-        filter: grayscale(20%) contrast(1.1); 
-        transition: filter 0.3s;
-    }
-    
-    /* AFTERMOVIE / PARK SECTION */
-    #aftermovieSection h3 {
-        font-weight: normal;
-        font-style: italic;
-        margin-top: 0;
-        color: var(--accent-gold);
-        text-align: left;
-        margin-bottom: 15px;
-    }
-    #aftermovieSection .map-area-content {
-        height: 400px; 
-        margin-bottom: 0;
-    }
+    #aftermovieSection .map-area-content iframe { width: 100%; height: 100%; }
 
     /* --- FOOTER SPONSORS --- */
     .footer-section {
@@ -310,12 +352,10 @@
         padding: 8px 16px; border-radius: 50px;
         transition: all 0.3s;
     }
-    .contact-link:hover {
-        background: #fff; color: #000; border-color: #fff;
-    }
+    .contact-link:hover { background: #fff; color: #000; border-color: #fff; }
     
     /* --- BACKGROUND SLIDESHOW --- */
-    .bg-slideshow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 1; }
+    .bg-slideshow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
     .bg-slideshow div { position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; animation: slideShowAnim 24s infinite; }
     .bg-slideshow div:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80'); animation-delay: 0s; }
     .bg-slideshow div:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80'); animation-delay: 6s; }
@@ -329,12 +369,10 @@
        .time-number { font-size: 2rem; } 
        .login-title { font-size: 2.5rem; }
        .minimal-container { padding: 25px; width: 95%; }
-       #eventDetailsSection { padding: 40px 10px; }
-       .sponsor-track { animation-duration: 10s; }
-       .contact-icons { flex-direction: column; align-items: center; }
        .info-grid { grid-template-columns: 1fr; }
-       #loginContentWrapper { padding: 30px 20px; }
-       #aftermovieSection .map-area-content { height: 250px; }
+       .gift-header { font-size: 1.8rem; }
+       .gift-info-section { height: 400px; }
+       .contact-icons { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
@@ -381,6 +419,22 @@
                 </div>
             </div>
 
+            <div class="gift-info-section">
+                <video class="gift-video-bg" autoplay muted loop playsinline>
+                    <source src="https://www.youtube.com/watch?v=YMY8rheo7bM" type="video/mp4">
+                </video>
+                <div class="gift-overlay-content">
+                    <i class="fa-solid fa-gift" style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 15px;"></i>
+                    <div class="gift-header">Informasi Tukar Kado</div>
+                    <p class="gift-desc">
+                        Mari semarakkan acara dengan saling berbagi! <br>
+                        Membawa kado minimal seharga <b>Rp 50.000,-</b> <br>
+                        Dibungkus dengan <b>Kertas Payung Coklat</b>.
+                    </p>
+                    <div class="gift-badge"><i class="fa-solid fa-vest"></i> DRESSCODE: MERAH / HIJAU</div>
+                </div>
+            </div>
+
             <div class="venue-slider-container">
                 <div class="venue-slide">
                    <img src="https://images.unsplash.com/photo-1596283597818-8c1056586326?q=80&w=1000&auto=format&fit=crop" alt="Park 1">
@@ -397,21 +451,20 @@
             </div>
 
             <div class="map-container-full">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6142.01806259959!2d110.80905534415213!3d-7.5556376974234185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a1736886a85cd%3A0xbfb2956209b033ef!2sBalekambang%20Park!5e1!3m2!1sen!2sid!4v1763995818819!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.123456789!2d110.81!3d-7.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a167000000001%3A0x0!2sTaman%20Balekambang%20Surakarta!5e0!3m2!1sid!2sid!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
             </div>
             
-            <div id="aftermovieSection" class="map-area" style="margin-top: 30px;">
-                <h3 style="margin-bottom: 5px;">Aftermovie Acara Tahun 2023</h3> 
-                <div class="map-area-content" style="height: 400px; margin-bottom: 0;">
+            <div id="aftermovieSection" class="map-area" style="margin-top: 10px;">
+                <h3 style="font-style: italic; color: var(--accent-gold); margin-bottom: 15px; font-weight: normal;">Aftermovie Acara Tahun 2023</h3> 
+                <div class="map-area-content">
                     <iframe 
                         src="https://www.youtube.com/embed/SClheB9mmp4" 
                         title="Video Aftermovie Trah Soemarsoen"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
                         allowfullscreen>
                     </iframe>
-                    <div class="venue-caption">Video Aftermovie</div>
+                    <div class="venue-caption">Video Dokumentasi</div>
                 </div>
             </div>
         </div>
@@ -430,29 +483,15 @@
                     <span class="sponsor-item">@hizyourbae</span>
                     <span class="sponsor-item">📷 Hycamera Solo</span>
                     <span class="sponsor-item">Fujifilm</span>
-                    <span class="sponsor-item" style="opacity:0.3">|</span>
-                    <span class="sponsor-item"><i class="fa-brands fa-google"></i> Google</span>
-                    <span class="sponsor-item"><i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI</span>
-                    <span class="sponsor-item">@hizyourbae</span>
-                    <span class="sponsor-item">📷 Hycamera Solo</span>
-                    <span class="sponsor-item">Fujifilm</span>
                 </div>
             </div>
 
             <div class="footer-info">
-                <div class="made-with">
-                    Made with <i class="fa-solid fa-heart"></i> @hizyourbae
-                </div>
+                <div class="made-with">Made with <i class="fa-solid fa-heart"></i> @hizyourbae</div>
                 <div class="contact-icons">
-                    <a href="https://instagram.com/trahsoemarsoen" target="_blank" class="contact-link">
-                        <i class="fa-brands fa-instagram"></i> @trahsoemarsoen
-                    </a>
-                    <a href="https://wa.me/62815xxxxxxx" target="_blank" class="contact-link">
-                        <i class="fa-brands fa-whatsapp"></i> 0815 xxxx xxxx
-                    </a>
-                    <a href="https://www.youtube.com/@DSoemarsoen_FAMILY" target="_blank" class="contact-link">
-                        <i class="fa-brands fa-youtube"></i> DSoemarsoen FAMILY
-                    </a>
+                    <a href="https://instagram.com/trahsoemarsoen" target="_blank" class="contact-link"><i class="fa-brands fa-instagram"></i> @trahsoemarsoen</a>
+                    <a href="https://wa.me/628150000000" target="_blank" class="contact-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Admin</a>
+                    <a href="https://www.youtube.com/@DSoemarsoen_FAMILY" target="_blank" class="contact-link"><i class="fa-brands fa-youtube"></i> DSoemarsoen FAMILY</a>
                 </div>
             </div>
         </div>
@@ -460,100 +499,65 @@
   </div>
 
   <script>
-    // FUNGSI UTAMA COUNTDOWN
     function startCountdown(targetTime) {
         const timerEl = document.getElementById("lockdownCountdownTimer");
         const updateTimer = () => {
             const now = Date.now(); 
             const dist = targetTime - now;
-
             if (dist < 0) { 
-                // Jika waktu habis, sembunyikan timer 
                 document.getElementById("countdownSection").style.display = 'none'; 
                 return; 
             }
-            
             const days = Math.floor(dist / (1000 * 60 * 60 * 24));
             const hours = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((dist % (1000 * 60)) / 1000);
-            
             timerEl.innerHTML = `<div class="time-card"><span class="time-number">${days}</span><span class="time-label">Hari</span></div><div class="time-card"><span class="time-number">${String(hours).padStart(2, '0')}</span><span class="time-label">Jam</span></div><div class="time-card"><span class="time-number">${String(minutes).padStart(2, '0')}</span><span class="time-label">Menit</span></div><div class="time-card"><span class="time-number" style="color:#ccc;">${String(seconds).padStart(2, '0')}</span><span class="time-label">Detik</span></div>`;
         };
-        
         updateTimer(); 
         setInterval(updateTimer, 1000);
     }
     
-    // FUNGSI ANIMASI KALENDER
     function triggerCalendarAnim() {
         const wrapper = document.getElementById('calendarFlip');
         if(!wrapper) return;
         wrapper.querySelectorAll('.tear-anim').forEach(e => e.remove());
-        
         const page = document.getElementById('calPage');
         const monthEl = page.querySelector('.cal-month');
         const dayEl = page.querySelector('.cal-day');
-        
-        let currentDay = 24; 
-        let currentMonth = "NOV";
-
-        monthEl.innerText = "NOV";
-        dayEl.innerText = "24";
-        monthEl.style.background = "#d00";
-        monthEl.style.color = "#fff";
-
+        let currentDay = 24; let currentMonth = "NOV";
+        monthEl.innerText = "NOV"; dayEl.innerText = "24";
         const interval = setInterval(() => {
             const newPage = page.cloneNode(true);
             newPage.classList.add('tear-anim');
             wrapper.appendChild(newPage);
             setTimeout(() => newPage.remove(), 600);
-
             currentDay++;
             if(currentMonth === "NOV" && currentDay > 30) {
-                currentMonth = "DES";
-                currentDay = 1;
-                monthEl.style.background = "var(--accent-gold)";
-                monthEl.style.color = "#000";
+                currentMonth = "DES"; currentDay = 1;
+                monthEl.style.background = "var(--accent-gold)"; monthEl.style.color = "#000";
             }
-            
-            monthEl.innerText = currentMonth;
-            dayEl.innerText = currentDay;
-
+            monthEl.innerText = currentMonth; dayEl.innerText = currentDay;
             if(currentMonth === "DES" && currentDay === 28) {
                 clearInterval(interval);
-                monthEl.innerText = "DES";
-                dayEl.innerText = "28";
-                monthEl.style.background = "var(--accent-gold)";
-                monthEl.style.color = "#000";
             }
         }, 150);
     }
 
-    // FUNGSI SCROLL AKTIF KEMBALI DAN TAMPILKAN DETAIL
     window.scrollToDetails = () => {
         const details = document.getElementById('eventDetailsSection');
         const loginScreen = document.getElementById('loginScreen');
-
-        // 1. Hapus scroll lock dari body (Mengaktifkan kembali scrolling)
         document.body.style.overflowY = 'auto';
-        
-        // 2. Hapus batasan tinggi pada container utama agar konten detail bisa terlihat sepenuhnya
         loginScreen.style.height = 'auto';
         loginScreen.style.overflow = 'visible';
-
-        // 3. Scroll ke bagian detail acara
         setTimeout(() => {
             details.scrollIntoView({ behavior: 'smooth' });
-            // 4. Jalankan animasi kalender
             setTimeout(triggerCalendarAnim, 500); 
         }, 50); 
     };
 
-    // INISIALISASI
     window.onload = function() { 
-        // Tanggal Target Countdown: 26 Desember 2025, 10:00:00 WIB
-        const targetDate = new Date(2025, 11, 26, 10, 0, 0).getTime();
+        const targetDate = new Date(2025, 11, 28, 10, 0, 0).getTime();
         startCountdown(targetDate);
     };
   </script>
