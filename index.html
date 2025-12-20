@@ -8,8 +8,50 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" as="style">
+
   <style>
+    /* --- LOADING SCREEN --- */
+    #loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s;
+    }
+
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(212, 175, 55, 0.1);
+      border-radius: 50%;
+      border-top-color: #D4AF37;
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+
+    .loader-text {
+      color: #D4AF37;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+    .loaded #loading-overlay {
+      opacity: 0;
+      visibility: hidden;
+    }
+
     /* --- RESET & VARIABLE --- */
     :root {
         --bg-dark: #000000;
@@ -151,11 +193,11 @@
     }
     .info-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
 
-    /* GIFT EXCHANGE SECTION */
+    /* GIFT EXCHANGE SECTION - PERBAIKAN */
     .gift-info-section {
         position: relative;
         width: 100%;
-        min-height: 500px;
+        min-height: 600px;
         border-radius: 24px;
         overflow: hidden;
         display: flex;
@@ -163,8 +205,9 @@
         justify-content: center;
         border: 1px solid var(--accent-gold);
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        padding: 60px 20px;
+        padding: 40px 15px;
         background: #000;
+        box-sizing: border-box;
     }
 
     .video-background {
@@ -186,31 +229,58 @@
     .gift-overlay-content {
         position: relative;
         z-index: 1;
-        max-width: 800px;
+        max-width: 900px;
         width: 100%;
         text-align: center;
         color: #fff;
+        margin: 0 auto;
     }
-    .gift-header { font-family: var(--font-serif); font-size: 2.8rem; color: var(--accent-gold); margin-bottom: 30px; font-style: italic; font-weight: 700; text-shadow: 0 2px 15px rgba(0,0,0,0.8); }
+    
+    .gift-header { 
+        font-family: var(--font-serif); 
+        font-size: clamp(2rem, 5vw, 2.8rem); 
+        color: var(--accent-gold); 
+        margin-bottom: 30px; 
+        font-style: italic; 
+        font-weight: 700; 
+        text-shadow: 0 2px 15px rgba(0,0,0,0.8); 
+    }
     
     .gift-rules-card {
         background: rgba(15, 23, 42, 0.85);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 20px;
-        padding: 40px;
+        padding: clamp(20px, 4vw, 40px);
         text-align: left;
         box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        box-sizing: border-box;
+        width: 100%;
     }
 
     .gift-rules-grid {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-columns: 1.1fr 0.9fr;
         gap: 30px;
+        align-items: start;
     }
 
-    .rule-item { display: flex; gap: 15px; margin-bottom: 18px; font-size: 1.05rem; line-height: 1.5; color: #f1f5f9; }
-    .rule-item i { color: var(--accent-gold); font-size: 1.2rem; margin-top: 3px; }
+    .rule-item { 
+        display: flex; 
+        gap: 15px; 
+        margin-bottom: 18px; 
+        font-size: 1rem; 
+        line-height: 1.5; 
+        color: #f1f5f9; 
+    }
+    
+    .rule-item i { 
+        color: var(--accent-gold); 
+        font-size: 1.2rem; 
+        margin-top: 3px; 
+        flex-shrink: 0;
+    }
+    
     .rule-item b { color: #fff; font-weight: 700; }
 
     .example-box {
@@ -219,8 +289,16 @@
         padding: 20px;
         border-radius: 10px;
         font-size: 0.95rem;
+        height: 100%;
+        box-sizing: border-box;
     }
-    .example-box h4 { margin: 0 0 10px 0; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px; }
+    
+    .example-box h4 { 
+        margin: 0 0 10px 0; 
+        color: var(--accent-gold); 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+    }
 
     .ic-icon-bw { font-size: 3rem; margin-bottom: 20px; color: var(--accent-gold); }
     .ic-label { font-family: var(--font-sans); color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
@@ -251,12 +329,11 @@
     .map-area-content { width: 100%; height: 450px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); position: relative; }
     .map-area-content iframe { width: 100%; height: 100%; }
 
-    /* Pastikan di file CSS Anda atau dalam tag <style> */
     .map-section {
         width: 100%;
-        padding: 20px 0; /* Memberi ruang agar judul tidak menempel ke atas */
-     display: block;  /* Memastikan container tampil */
-}
+        padding: 20px 0; 
+        display: block;  
+    }
 
     /* --- FOOTER & CONTACT --- */
     .footer-section { width: 100%; max-width: 1000px; margin-top: 40px; text-align: center; }
@@ -272,15 +349,24 @@
     .contact-link:hover { background: #fff; color: #000; border-color: #fff; }
 
     @media (max-width: 850px) {
-        .gift-rules-grid { grid-template-columns: 1fr; }
+        .gift-rules-grid { 
+            grid-template-columns: 1fr; 
+            gap: 20px;
+        }
         .info-grid { grid-template-columns: 1fr; }
         .login-title { font-size: 2.8rem; }
-        .gift-header { font-size: 2.2rem; }
         .gift-rules-card { padding: 25px; }
+        .minimal-container { padding: 25px 15px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">Memuat Kebahagiaan...</div>
+  </div>
 
   <!-- BAGIAN SLIDESHOW BACKGROUND -->
   <div class="bg-slideshow">
@@ -332,14 +418,13 @@
             <!-- BAGIAN INFO KADO DENGAN VIDEO BACKGROUND -->
             <div class="gift-info-section">
                 <div class="video-background">
-                    <!-- URL Video YouTube untuk Background -->
                     <iframe src="https://www.youtube.com/embed/YMY8rheo7bM?autoplay=1&mute=1&loop=1&playlist=YMY8rheo7bM&controls=0&showinfo=0&rel=0&iv_load_policy=3&end=20" frameborder="0" allow="autoplay; encrypted-media"></iframe>
                 </div>
                 <div class="gift-overlay-content">
                     <div class="gift-header">Informasi Tukar Kado</div>
                     <div class="gift-rules-card">
                         <div class="gift-rules-grid">
-                            <div>
+                            <div class="rules-list">
                                 <div class="rule-item">
                                     <i class="fa-solid fa-circle-check"></i>
                                     <span><b>Jumlah:</b> 1 kado per keluarga besar (perwakilan anak Simbah).</span>
@@ -356,14 +441,14 @@
                                     <i class="fa-solid fa-circle-check"></i>
                                     <span><b>Isi Kado:</b> Mencerminkan ciri khas Eyang masing-masing.</span>
                                 </div>
-                                <div class="rule-item">
+                                <div class="rule-item" style="margin-bottom: 0;">
                                     <i class="fa-solid fa-circle-check"></i>
                                     <span><b>Identitas:</b> Masukkan kartu berisi <b>3 Kata Kunci</b> ciri khas Eyang.</span>
                                 </div>
                             </div>
                             <div class="example-box">
                                 <h4>💡 Contoh</h4>
-                                <p>Jika Eyang suka <b>berkebun</b>, warna <b>biru</b>, & <b>teh</b>.</p>
+                                <p style="margin-bottom: 10px;">Jika Eyang suka <b>berkebun</b>, warna <b>biru</b>, & <b>teh</b>.</p>
                                 <p><b>Kado:</b> Cangkir Biru.<br><b>Keyword:</b> Kebun, Biru, Teh.</p>
                             </div>
                         </div>
@@ -371,7 +456,7 @@
                 </div>
             </div>
 
-                        <!-- BAGIAN SLIDER FOTO LOKAL -->
+            <!-- BAGIAN SLIDER FOTO LOKAL -->
             <div class="venue-slider-container">
                 <div class="venue-slide">
                     <img src="img/PXL_20250629_051727539.LONG_EXPOSURE-01.COVER.jpg" alt="Park 1">
@@ -403,24 +488,23 @@
         </div>
 
         <div class="footer-section">
-        <!-- SPONSOR SECTION DENGAN IKON TERBARU -->
-        <div class="sponsor-marquee-wrapper" style="margin-top: 50px;">
-            <div class="sponsor-track">
-                <span class="sponsor-item"><i class="fa-brands fa-google"></i> Google</span>
-                <span class="sponsor-item"><i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI</span>
-                <span class="sponsor-item">@hizyourbae</span>
-                <span class="sponsor-item">📷 Hycamera Solo</span>
-                <span class="sponsor-item">Fujifilm</span>
-                <span class="sponsor-item"><i class="fa-brands fa-github"></i> Github</span>
-                <span class="sponsor-item" style="opacity:0.3">|</span>
-                <span class="sponsor-item"><i class="fa-brands fa-google"></i> Google</span>
-                <span class="sponsor-item"><i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI</span>
-                <span class="sponsor-item">@hizyourbae</span>
-                <span class="sponsor-item">📷 Hycamera Solo</span>
-                <span class="sponsor-item">Fujifilm</span>
-                <span class="sponsor-item"><i class="fa-brands fa-github"></i> Github</span>
+            <div class="sponsor-marquee-wrapper" style="margin-top: 50px;">
+                <div class="sponsor-track">
+                    <span class="sponsor-item"><i class="fa-brands fa-google"></i> Google</span>
+                    <span class="sponsor-item"><i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI</span>
+                    <span class="sponsor-item">@hizyourbae</span>
+                    <span class="sponsor-item">📷 Hycamera Solo</span>
+                    <span class="sponsor-item">Fujifilm</span>
+                    <span class="sponsor-item"><i class="fa-brands fa-github"></i> Github</span>
+                    <span class="sponsor-item" style="opacity:0.3">|</span>
+                    <span class="sponsor-item"><i class="fa-brands fa-google"></i> Google</span>
+                    <span class="sponsor-item"><i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI</span>
+                    <span class="sponsor-item">@hizyourbae</span>
+                    <span class="sponsor-item">📷 Hycamera Solo</span>
+                    <span class="sponsor-item">Fujifilm</span>
+                    <span class="sponsor-item"><i class="fa-brands fa-github"></i> Github</span>
+                </div>
             </div>
-        </div>
 
             <div class="footer-info">
                 <div class="made-with">Made with <i class="fa-solid fa-heart"></i> @hizyourbae</div>
@@ -435,6 +519,14 @@
   </div>
 
   <script>
+    // --- LOADING HANDLER ---
+    window.addEventListener('load', function() {
+      // Memberi sedikit delay agar transisi terasa lebih smooth
+      setTimeout(() => {
+        document.body.classList.add('loaded');
+      }, 500);
+    });
+
     function startCountdown(targetTime) {
         const timerEl = document.getElementById("lockdownCountdownTimer");
         const updateTimer = () => {
@@ -502,10 +594,8 @@
         }, 50); 
     };
 
-    window.onload = function() { 
-        const targetDate = new Date(2025, 11, 28, 10, 0, 0).getTime();
-        startCountdown(targetDate);
-    };
+    const targetDate = new Date(2025, 11, 28, 10, 0, 0).getTime();
+    startCountdown(targetDate);
   </script>
 </body>
 </html>
