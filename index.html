@@ -52,6 +52,67 @@
       visibility: hidden;
     }
 
+    /* --- POPUP STYLING --- */
+#announcement-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 10000; /* Di atas segalanya */
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#announcement-modal {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    background: #1e293b;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--accent-gold);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    animation: popupScale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popupScale {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.popup-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.popup-footer {
+    padding: 20px;
+    background: #1e293b;
+    text-align: center;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.popup-close-btn {
+    margin-top: 0 !important; /* Reset margin dari style button global */
+    width: 100%;
+    padding: 12px !important;
+    background: var(--accent-gold);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.popup-close-btn:hover {
+    background: #fff;
+    transform: translateY(-2px);
+}
+
     /* --- RESET & VARIABLE --- */
     :root {
         --bg-dark: #000000;
@@ -413,6 +474,15 @@
     <div class="loader-text">Memasak Tengkleng...</div>
   </div>
 
+  <div id="announcement-overlay">
+  <div id="announcement-modal">
+    <img src="img/Important Announcement.webp" alt="Pemberitahuan Penting" class="popup-img">
+    <div class="popup-footer">
+      <button class="popup-close-btn" onclick="closePopup()">Saya Mengerti</button>
+    </div>
+  </div>
+</div>
+
   <!-- BAGIAN SLIDESHOW BACKGROUND (FIXED) -->
   <div class="bg-slideshow">
       <div></div>
@@ -589,6 +659,30 @@
         document.body.classList.add('loaded');
       }, 500);
     });
+
+    // Fungsi untuk memunculkan Popup
+function showAnnouncement() {
+    const overlay = document.getElementById('announcement-overlay');
+    overlay.style.display = 'flex';
+}
+
+// Fungsi untuk menutup Popup
+function closePopup() {
+    const overlay = document.getElementById('announcement-overlay');
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, 300);
+}
+
+// Modifikasi window.onload yang sudah ada
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+        // Panggil popup 1 detik setelah loader hilang
+        setTimeout(showAnnouncement, 1000); 
+    }, 500);
+});
 
     function startCountdown(targetTime) {
         const timerEl = document.getElementById("lockdownCountdownTimer");
